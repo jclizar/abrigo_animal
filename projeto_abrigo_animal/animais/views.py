@@ -127,6 +127,7 @@ def get_geolocation():
 
     return latitude, longitude
 
+from django.http import HttpResponse
 def map_view(request):
     lat_p = request.GET.get("lat_p").replace(',','.')
     lon_p = request.GET.get("lon_p").replace(',','.')
@@ -144,8 +145,11 @@ def map_view(request):
         #[float(lat_p), float(lon_p)]   # Person location
     ])
     '''
-    mapa.save('animais/templates/map.html')
-    return render(request, 'map.html')
+    ##mapa.save('animais/templates/map.html')
+    ##return render(request, 'map.html')
+
+    mapa_html = mapa._repr_html_()
+    return HttpResponse(mapa_html)
 
 # ----------------------------------------------------------------------- DETALHES
 
